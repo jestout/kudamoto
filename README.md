@@ -2,7 +2,7 @@
 
 ## Introduction
 Synchronization phenomena, in which large numbers of independent oscillators spontaneously lock into the same phase, are ubiquitous in chemical and biological systems, arising in e.g. fireflies, pacemaker cells, the neurons reponsible for our circadian rhythm, and Josephson junctions. Perhaps the simplest model of this phenomena is due to Kuramoto, who studied the system of $N$ oscillators with coupled equations of motion 
-$$\theta_i = \omega_i + \frac{K}{N} \sum_{j = 1}^{N} \sin(\theta_j - \theta_i),$$
+$$\frac{\mathrm{d}\theta_i}{\mathrm{d}t} = \omega_i + \frac{K}{N} \sum_{j = 1}^{N} \sin(\theta_j - \theta_i),$$
 where $\theta_i \in [0, 2 \pi)$ describes the phase of each oscillator with natural frequency $\omega_i$ drawn from some distribution $g(\omega)$, and $K$ governs the strength of coupling between each oscillator. 
 
 Kuramoto was able to obtain analytic results for this model in the large $N \to \infty$ limit, finding that there is a critical value of the coupling $K = K_{\mathrm{c}}$ beyond which the system displays an emergent collective behavior characterized by a clumping of phases around a central average phase value. Specifically, we can characterize the phase of the system via the order parameter 
@@ -11,7 +11,7 @@ When the system is completely desynchronized and the oscillators are uniformly s
 
 ## Random Networks
 The Kuramoto model assumes that each oscillator is coupled to every other oscillator with the same strength---not exactly something we should expect in real world systems, where couplings often depend on distance and these oscillators naturally form clusters. We are naturally led to a generalization of the Kuramoto model in which connections between oscillators are governed by a network structure where some oscillators are connected to one another while others are not. The Kuramoto model is then modified to 
-$$\dot{\theta}_i = \omega_i + \frac{K}{N} \sum_{j = 1}^{N} A_{ij} \sin(\theta_j - \theta_i),$$
+$$\frac{\mathrm{d}\theta_i}{\mathrm{d}t} = \omega_i + \frac{K}{N} \sum_{j = 1}^{N} A_{ij} \sin(\theta_j - \theta_i),$$
 where $A_{ij}$ is a symmetric matrix of $1$'s and $0$'s called an adjacency matrix: $A_{ij} = 1$ if the oscillators $\theta_i$ and $\theta_j$ are connected to one another, while $A_{ij} = 0$ if they are not.  To my knowledge, this model is not analytically solvable and so understanding how network structure affects the ability of these oscillators to synchronize after long times requires numerical simulation. 
 
 Unfortunately, the computational complexity of this problem rapidly grows---not only is this a collective phenomena, requiring the coordination of hundreds of individual oscillators, but it is also a long-time phenomena, in which the system must be simulated long enough to approach a steady state. Fortunately, it is easily parallelizable. `Kudamoto` was written by myself during an REU in 2010 at the University of Maryland to first generate the adacency matrices for either Erdös-Rènyi or Barabási-Albert scale-free random networks and then simulate the generalized Kuramoto model above using a standard fourth-order Runge-Kutta method until it equilibrates. This was used to write the paper [Local Synchronization in Complex Networks of Coupled Oscillators](https://doi.org/10.1063/1.3581168) by myself, fellow REU student Matt Whiteway, Edward Ott, Michelle Girvan, and Tom Antonsen. `kura_fast` is an implementation in C++ using several Boost libraries, while `kudamoto` is an implementation in CUDA 1.1 (before it was cool).
