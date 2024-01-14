@@ -3,7 +3,7 @@
 ## Introduction
 Synchronization phenomena, in which large numbers of independent oscillators spontaneously lock into the same phase, are ubiquitous in chemical and biological systems, arising in e.g. fireflies, pacemaker cells, the neurons reponsible for our circadian rhythm, and Josephson junctions. Perhaps the simplest model of this phenomena is due to Kuramoto, who studied the system of $N$ oscillators with coupled equations of motion 
 $$\frac{\mathrm{d}\theta_i}{\mathrm{d}t} = \omega_i + \frac{K}{N} \sum_{j = 1}^{N} \sin(\theta_j - \theta_i),$$
-where $\theta_i \in [0, 2 \pi)$ describes the phase of each oscillator with natural frequency $\omega_i$ drawn from some distribution $g(\omega)$, and $K$ governs the strength of coupling between each oscillator. 
+where $\theta_i \equiv \theta_i(t) \in [0, 2 \pi)$ describes the phase of each oscillator with natural frequency $\omega_i$ drawn from some distribution $g(\omega)$, and $K$ governs the strength of coupling between each oscillator. 
 
 Kuramoto was able to obtain analytic results for this model in the large $N \to \infty$ limit, finding that there is a critical value of the coupling $K = K_{\mathrm{c}}$ beyond which the system displays an emergent collective behavior characterized by a clumping of phases around a central average phase value. Specifically, we can characterize the phase of the system via the order parameter 
 $$r = \left| \frac{1}{N} \sum_{i = 1}^{N} \mathrm{e}^{i \theta_i}\right|.$$ 
